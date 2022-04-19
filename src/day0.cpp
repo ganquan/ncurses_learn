@@ -1,18 +1,13 @@
+#include <form.h>
 #include <ncurses.h>
+#include <ncurses/menu.h>
+#include <panel.h>
+#include <stdio.h>
 
-using namespace std;
+#include <string>
 
-int main(int argc, char** argv) {
+int main() {
+  //
 
-    initscr();
-
-    printw("hello ncurses!");
-
-    refresh();
-
-    getch();
-
-    endwin();
-
-    return 0;
+  return 0;
 }
