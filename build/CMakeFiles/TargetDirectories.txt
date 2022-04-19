@@ -1,0 +1,3 @@
+/Users/ganquan/Code/GitHub/ncurses_learn/build/CMakeFiles/day0.dir
+/Users/ganquan/Code/GitHub/ncurses_learn/build/CMakeFiles/edit_cache.dir
+/Users/ganquan/Code/GitHub/ncurses_learn/build/CMakeFiles/rebuild_cache.dir
