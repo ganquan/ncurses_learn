@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/Users/ganquan/Code/GitHub/ncurses_learn/build",
-  "command": "/usr/bin/clang++ -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/day0.dir/src/day0.cpp.o -c /Users/ganquan/Code/GitHub/ncurses_learn/src/day0.cpp",
-  "file": "/Users/ganquan/Code/GitHub/ncurses_learn/src/day0.cpp"
-}
-]
