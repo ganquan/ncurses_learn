@@ -1,40 +1,52 @@
+#pragma once
 #include <ncurses.h>
+
+#define BOARD_DIM  20
+#define BOARD_ROWS BOARD_DIM
+#define BOARD_COLS BOARD_DIM * 2.5
 
 class Board {
  public:
-  Board(int height, int width) {
+    Board() { _board(BOARD_ROWS, BOARD_COLS); }
 
-    this->board_width = width;
-    this->board_height = height;
+    Board(int height, int width) {
+      _board(height, width);
+    }
 
-    int scr_w, scr_h;
-    getmaxyx(stdscr, scr_h, scr_w);
+    void initialize() {
+        clear();
+        refresh();
+    }
 
-    int board_x = (scr_w - this->board_width) / 2;
-    int board_y = (scr_h - this->board_height) / 2;
+    void addBorder() { box(board_win, 0, 0); }
 
-    board_win = newwin(this->board_height, this->board_width, board_y, board_x);
-    
-  }
+    void addAt(int y, int x, chtype ch) { mvwaddch(board_win, y, x, ch); }
 
-  void initialize() {
-      clear();
-      refresh();
-  }
+    chtype getInput() { return wgetch(board_win); }
 
-  void addBorder() { box(board_win, 0, 0); }
+    void clear() {
+        wclear(board_win);
+        addBorder();
+    }
 
-  void addAt(int y, int x, chtype ch) { mvwaddch(board_win, y, x, ch); }
-
-  void clear() {
-    wclear(board_win);
-    addBorder();
-  }
-
-  void refresh() { wrefresh(board_win); }
+    void refresh() { wrefresh(board_win); }
 
  private:
-  WINDOW *board_win;
-  int board_width;
-  int board_height;
+    void _board(int height, int width) {
+        this->board_width = width;
+        this->board_height = height;
+
+        int scr_w, scr_h;
+        getmaxyx(stdscr, scr_h, scr_w);
+
+        int board_x = (scr_w - this->board_width) / 2;
+        int board_y = (scr_h - this->board_height) / 2;
+
+        board_win =
+            newwin(this->board_height, this->board_width, board_y, board_x);
+    }
+
+    WINDOW *board_win;
+    int board_width;
+    int board_height;
 };

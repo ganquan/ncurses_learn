@@ -10,5 +10,9 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(/opt/homebrew/opt/ncurses/include)
 link_directories(/opt/homebrew/opt/ncurses/lib)
 
-add_executable(snake ${SRC_ROOT}/main.cpp ${SRC_ROOT}/board.cpp)
+add_executable(snake 
+    ${SRC_ROOT}/main.cpp 
+    ${SRC_ROOT}/board.cpp 
+    ${SRC_ROOT}/engine.cpp)
+
 target_link_libraries(snake ncurses)

@@ -2,26 +2,18 @@
 #include <stdio.h>
 #include <string>
 
-#include "board.cpp"
-
-
-#define BOARD_DIM 20
-#define BOARD_ROWS BOARD_DIM
-#define BOARD_COLS BOARD_DIM * 2.5
-
+#include "engine.cpp"
 
 using namespace  std;
 
 int main() {
   initscr();
   refresh();
+  noecho();
   
-  Board board = Board(BOARD_ROWS, BOARD_COLS);
-  board.initialize();
+  Engine engine = Engine();
+  engine.run();
   
-  board.addAt(5, 5, '#');
-  board.refresh();
-
   getch();
   endwin(); 
   
