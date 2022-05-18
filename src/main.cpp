@@ -1,22 +1,22 @@
 #include <ncurses.h>
 #include <stdio.h>
+
 #include <string>
 
 #include "engine.cpp"
 
-using namespace  std;
+using namespace std;
 
 int main() {
+    initscr();
+    refresh();
+    noecho();
 
-  initscr();
-  refresh();
-  noecho();
-  
-  Engine engine = Engine();
-  engine.run();
-  
-  getch();
-  endwin(); 
-  
-  return 0;
+    Engine engine = Engine();
+    engine.run();
+
+    getch();
+    endwin();
+
+    return 0;
 }
