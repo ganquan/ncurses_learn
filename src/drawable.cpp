@@ -1,11 +1,15 @@
 #pragma once
 #include <ncurses.h>
 
+const chtype DEFAULT_ICON = ' ';
+const chtype DEFAULT_EMPTY = ' ';
+const chtype DEFAULT_APPLE = '@';
+const chtype DEFAULT_SNAKE = '#';
 class Drawable {
  public:
     Drawable() {
         y = x = 0;
-        icon = ' ';
+        icon = DEFAULT_ICON;
     }
 
     Drawable(int y, int x, chtype ch) {

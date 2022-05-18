@@ -33,7 +33,7 @@ class Board {
     void addAt(int y, int x, chtype ch) { mvwaddch(board_win, y, x, ch); }
 
     void getEmptyCoordinates(int &y, int &x) {
-        while (mvwinch(board_win, y = rand() % board_height, x = rand() % board_width) != ' ');
+        while (mvwinch(board_win, y = rand() % board_height, x = rand() % board_width) != DEFAULT_EMPTY);
     }
     
     chtype getInput() { return wgetch(board_win); }

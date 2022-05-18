@@ -8,6 +8,6 @@ class Apple : public Drawable {
         this->y = y;
         this->x = x;
 
-        this->icon = '@';
+        this->icon = DEFAULT_APPLE; 
     }
 };

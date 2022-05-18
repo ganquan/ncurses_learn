@@ -16,13 +16,13 @@ class SnakePiece : public Drawable {
  public:
     SnakePiece() {
         this->x = this->y = 0;
-        this->icon = '#';
+        this->icon = DEFAULT_SNAKE;
     }
 
     SnakePiece(int y, int x) {
         this->y = y;
         this->x = x;
-        this->icon = '#';
+        this->icon = DEFAULT_SNAKE;
     }
 };
 
