@@ -1,5 +1,12 @@
+#pragma once
+
+#include <time.h>
+#include <stdlib.h>
 #include "board.cpp"
 #include "drawable.cpp"
+#include "apple.cpp"
+#include "empty.cpp"
+
 
 class Engine {
  public:
@@ -8,6 +15,14 @@ class Engine {
       board.initialize();
       
       game_over = false;
+      pApple = nullptr;
+
+      srand(time(NULL));
+  }
+  
+  ~Engine() {
+    if (pApple != nullptr)
+      delete pApple;
   }
   
   void run(){
@@ -29,9 +44,15 @@ class Engine {
   }
   
   void updateState() {
-    board.add(Drawable(3, 3, '#'));
+    
+    int y, x;
+    board.getEmptyCoordinates(y, x);
 
-    board.add(Drawable(3, 7, '@'));
+    if (pApple != nullptr) {
+        board.add(Empty(this->pApple->getY(), this->pApple->getX()));
+    }
+    pApple = new Apple(y, x);
+    board.add(*pApple);
   }
   
   void redraw() {
@@ -45,5 +66,6 @@ class Engine {
 
  private:
   Board board;
+  Apple *pApple;
   bool game_over;
 };

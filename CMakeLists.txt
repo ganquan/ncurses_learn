@@ -13,6 +13,19 @@ link_directories(/opt/homebrew/opt/ncurses/lib)
 add_executable(snake 
     ${SRC_ROOT}/main.cpp 
     ${SRC_ROOT}/board.cpp 
-    ${SRC_ROOT}/engine.cpp)
+    ${SRC_ROOT}/engine.cpp
+    ${SRC_ROOT}/apple.cpp
+    ${SRC_ROOT}/empty.cpp)
 
 target_link_libraries(snake ncurses)
+
+
+# mkdir Debug
+# cd Debug
+# cmake -DCMAKE_BUILD_TYPE=Debug ..
+# make
+
+# mkdir Release
+# cd Release
+# cmake -DCMAKE_BUILD_TYPE=Release ..
+# make

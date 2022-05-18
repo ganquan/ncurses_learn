@@ -1,5 +1,6 @@
 #pragma once
 #include <ncurses.h>
+#include <stdlib.h>
 #include "drawable.cpp"
 
 #define BOARD_DIM  20
@@ -29,6 +30,10 @@ class Board {
 
     void addAt(int y, int x, chtype ch) { mvwaddch(board_win, y, x, ch); }
 
+    void getEmptyCoordinates(int &y, int &x) {
+        while (mvwinch(board_win, y = rand() % board_height, x = rand() % board_width) != ' ');
+    }
+    
     chtype getInput() { return wgetch(board_win); }
 
     void clear() {
