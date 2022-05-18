@@ -17,6 +17,10 @@ int main() {
   refresh();
   
   Board board = Board(BOARD_ROWS, BOARD_COLS);
+  board.initialize();
+  
+  board.addAt(5, 5, '#');
+  board.refresh();
 
   getch();
   endwin(); 
