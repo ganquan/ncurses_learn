@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include "drawable.cpp"
 
-#define BOARD_DIM  20
-#define BOARD_ROWS BOARD_DIM
-#define BOARD_COLS BOARD_DIM * 2.5
+const int BOARD_DIM = 20;
+const int BOARD_ROWS = BOARD_DIM;
+const int BOARD_COLS  = int(BOARD_DIM * 2.5);
 
 const int default_timeout = 200;
 
