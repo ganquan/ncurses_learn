@@ -7,11 +7,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
+            "name": "Launch(lldb)",
             "program": "${workspaceFolder}/build/snake",
+            "targetArchitecture": "arm64",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "stopAtEntry": true,
+            "stopAtEntry": false,
+            "environment": [],
+            "osx": {
+                "MIMode": "lldb"
+              },
         }
     ]
 }

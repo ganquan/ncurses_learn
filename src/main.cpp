@@ -7,6 +7,7 @@
 using namespace  std;
 
 int main() {
+
   initscr();
   refresh();
   noecho();

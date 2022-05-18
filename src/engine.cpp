@@ -1,4 +1,5 @@
 #include "board.cpp"
+#include "drawable.cpp"
 
 class Engine {
  public:
@@ -25,11 +26,12 @@ class Engine {
 
   void processInput() {
     chtype input = board.getInput();
-    
   }
   
   void updateState() {
-    
+    board.add(Drawable(3, 3, '#'));
+
+    board.add(Drawable(3, 7, '@'));
   }
   
   void redraw() {
