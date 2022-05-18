@@ -11,6 +11,8 @@ int main() {
     initscr();
     refresh();
     noecho();
+    
+    curs_set(0);    /* turn off the cursor */
 
     Engine engine = Engine();
     engine.run();

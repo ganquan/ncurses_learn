@@ -6,23 +6,51 @@
 #include "drawable.cpp"
 #include "apple.cpp"
 #include "empty.cpp"
+#include "snake.cpp"
 
 
 class Engine {
  public:
   Engine() {
       board = Board();
-      board.initialize();
-      
-      game_over = false;
+
       pApple = nullptr;
 
-      srand(time(NULL));
+      initialize();
   }
   
   ~Engine() {
     if (pApple != nullptr)
       delete pApple;
+  }
+
+  void initialize() {
+
+      board.initialize();
+      game_over = false;
+
+      srand(time(NULL));
+      
+
+      snake.setDirection(right);
+
+      SnakePiece next = SnakePiece(1, 1);
+      board.add(next);
+      snake.addPiece(next);
+      
+      next = snake.nextHead();
+      board.add(next);
+      snake.addPiece(next);
+
+      next = snake.nextHead();
+      board.add(next);
+      snake.addPiece(next);
+
+      snake.setDirection(right);
+
+      next = snake.nextHead();
+      board.add(next);
+      snake.addPiece(next);
   }
   
   void run(){
@@ -45,14 +73,25 @@ class Engine {
   
   void updateState() {
     
-    int y, x;
-    board.getEmptyCoordinates(y, x);
-
-    if (pApple != nullptr) {
-        board.add(Empty(this->pApple->getY(), this->pApple->getX()));
+    if (pApple == nullptr) {
+        int y, x;
+        board.getEmptyCoordinates(y, x);
+        pApple = new Apple(y, x);
+        board.add(*pApple);
     }
-    pApple = new Apple(y, x);
-    board.add(*pApple);
+
+    
+    SnakePiece next = snake.nextHead();
+    if (next.getX() != pApple->getX() && next.getY() != pApple->getY()) {
+      int emptyRow = snake.tail().getY();
+      int emptyCol = snake.tail().getX();
+      board.add(Empty(emptyRow, emptyCol));
+      snake.removePiece();
+    }
+    
+    board.add(next);
+    snake.addPiece(next);
+
   }
   
   void redraw() {
@@ -68,4 +107,5 @@ class Engine {
   Board board;
   Apple *pApple;
   bool game_over;
+  Snake snake;
 };

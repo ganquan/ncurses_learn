@@ -56,6 +56,10 @@ class Board {
 
         board_win =
             newwin(this->board_height, this->board_width, board_y, board_x);
+        
+        
+        wtimeout(board_win, 100);
+        // wtimeout(board_win, 1000);
     }
 
     WINDOW *board_win;
