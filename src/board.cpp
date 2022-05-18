@@ -7,6 +7,8 @@
 #define BOARD_ROWS BOARD_DIM
 #define BOARD_COLS BOARD_DIM * 2.5
 
+const int default_timeout = 200;
+
 class Board {
  public:
     Board() { _board(BOARD_ROWS, BOARD_COLS); }
@@ -42,6 +44,14 @@ class Board {
     }
 
     void refresh() { wrefresh(board_win); }
+    
+    void setTimeout(int timeout) {
+        wtimeout(board_win, timeout);
+    }
+    
+    void setDefaultTimeout() {
+        setTimeout(default_timeout);
+    }
 
  private:
     void _board(int height, int width) {
@@ -58,8 +68,9 @@ class Board {
             newwin(this->board_height, this->board_width, board_y, board_x);
         
         
-        wtimeout(board_win, 100);
-        // wtimeout(board_win, 1000);
+
+        setDefaultTimeout();
+        keypad(board_win, true);
     }
 
     WINDOW *board_win;

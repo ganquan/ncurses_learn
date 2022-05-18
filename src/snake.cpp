@@ -6,10 +6,10 @@
 #include "drawable.cpp"
 
 enum Direction {
-    up,
-    down,
-    left,
-    right
+    up = -1,
+    down = 1,
+    left = -2,
+    right = 2
 };
 
 class SnakePiece : public Drawable {
@@ -58,7 +58,10 @@ class Snake {
     }
     
     void setDirection(Direction d) {
-        cur_direction = d;
+        
+        if (cur_direction + d != 0) {
+            cur_direction = d;
+        }
     }
 
     SnakePiece nextHead() {
