@@ -7,6 +7,13 @@ project(ncurses-learn)
 set(SRC_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(CMAKE_CXX_STANDARD 17)
 
+SET(SILENCE_PRAGMA_ONCE_WARN "-Wno-pragma-once-outside-header")
+# SET(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
+
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${SILENCE_PRAGMA_ONCE_WARN}")
+# SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
+
+
 include_directories(/opt/homebrew/opt/ncurses/include)
 link_directories(/opt/homebrew/opt/ncurses/lib)
 
@@ -30,3 +37,5 @@ target_link_libraries(snake ncurses)
 # cd Release
 # cmake -DCMAKE_BUILD_TYPE=Release ..
 # make
+
+
