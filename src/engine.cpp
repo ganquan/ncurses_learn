@@ -32,23 +32,15 @@ class Engine {
 
         snake.setDirection(right);
 
-        SnakePiece next = SnakePiece(1, 1);
-        board.add(next);
-        snake.addPiece(next);
-
-        next = snake.nextHead();
-        board.add(next);
-        snake.addPiece(next);
-
-        next = snake.nextHead();
-        board.add(next);
-        snake.addPiece(next);
-
+        handleNextPiece(SnakePiece(1, 1));
+        handleNextPiece(snake.nextHead());
+        handleNextPiece(snake.nextHead());
         snake.setDirection(right);
+        handleNextPiece(snake.nextHead());
 
-        next = snake.nextHead();
-        board.add(next);
-        snake.addPiece(next);
+        if (pApple == nullptr) {
+            createApple();
+        }
     }
 
     void run() {
@@ -59,6 +51,35 @@ class Engine {
 
             redraw();
         }
+    }
+
+    void createApple() {
+        int y, x;
+        board.getEmptyCoordinates(y, x);
+        pApple = new Apple(y, x);
+        board.add(*pApple);
+    }
+
+    void destoryApple() {
+        delete pApple;
+        pApple = nullptr;
+    }
+
+    void handleNextPiece(SnakePiece next) {
+        if (pApple != nullptr &&
+            (next.getX() != pApple->getX() || next.getY() != pApple->getY())) {
+
+            int emptyRow = snake.tail().getY();
+            int emptyCol = snake.tail().getX();
+            board.add(Empty(emptyRow, emptyCol));
+            snake.removePiece();
+
+        } else {
+            destoryApple();
+        }
+
+        board.add(next);
+        snake.addPiece(next);
     }
 
     void processInput() {
@@ -96,23 +117,13 @@ class Engine {
     }
 
     void updateState() {
-        if (pApple == nullptr) {
-            int y, x;
-            board.getEmptyCoordinates(y, x);
-            pApple = new Apple(y, x);
-            board.add(*pApple);
-        }
-
+        
         SnakePiece next = snake.nextHead();
-        if (next.getX() != pApple->getX() && next.getY() != pApple->getY()) {
-            int emptyRow = snake.tail().getY();
-            int emptyCol = snake.tail().getX();
-            board.add(Empty(emptyRow, emptyCol));
-            snake.removePiece();
+        handleNextPiece(next);
+        
+        if (pApple == nullptr) {
+            createApple();
         }
-
-        board.add(next);
-        snake.addPiece(next);
     }
 
     void redraw() { board.refresh(); }
