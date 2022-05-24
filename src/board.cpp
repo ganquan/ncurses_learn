@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "drawable.cpp"
 
-const int BOARD_DIM = 20;
+const int BOARD_DIM = 12;
 const int BOARD_ROWS = BOARD_DIM;
 const int BOARD_COLS  = int(BOARD_DIM * 2.5);
 
@@ -32,11 +32,17 @@ class Board {
 
     void addAt(int y, int x, chtype ch) { mvwaddch(board_win, y, x, ch); }
 
+    chtype getInput() { return wgetch(board_win); }
+
     void getEmptyCoordinates(int &y, int &x) {
         while (mvwinch(board_win, y = rand() % board_height, x = rand() % board_width) != DEFAULT_EMPTY);
     }
     
-    chtype getInput() { return wgetch(board_win); }
+    chtype getCharAt(int y, int x) {
+        return mvwinch(board_win, y, x);
+    }
+    
+
 
     void clear() {
         wclear(board_win);

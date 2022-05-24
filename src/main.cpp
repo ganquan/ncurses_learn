@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include <string>
+#include <iostream>
 
 #include "engine.cpp"
 
@@ -20,5 +21,6 @@ int main() {
     getch();
     endwin();
 
+    cout << "Game Over!" << endl;
     return 0;
 }

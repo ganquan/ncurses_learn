@@ -66,16 +66,27 @@ class Engine {
     }
 
     void handleNextPiece(SnakePiece next) {
-        if (pApple != nullptr &&
-            (next.getX() != pApple->getX() || next.getY() != pApple->getY())) {
+        
+        if (pApple != nullptr) {
+            switch (board.getCharAt(next.getY(), next.getX())) {
+                case DEFAULT_APPLE:
+                    destoryApple();
+                    break;
 
-            int emptyRow = snake.tail().getY();
-            int emptyCol = snake.tail().getX();
-            board.add(Empty(emptyRow, emptyCol));
-            snake.removePiece();
+                case DEFAULT_EMPTY: {
+                    int emptyRow = snake.tail().getY();
+                    int emptyCol = snake.tail().getX();
+                    board.add(Empty(emptyRow, emptyCol));
+                    snake.removePiece();
 
-        } else {
-            destoryApple();
+                    break;
+                }
+
+                default:
+
+                    game_over = true;
+                    break;
+            }
         }
 
         board.add(next);
