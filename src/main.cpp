@@ -21,6 +21,6 @@ int main() {
     getch();
     endwin();
 
-    cout << "Game Over!" << endl;
+    cout << "You scored " << engine.getScore() << " Points!" << endl;
     return 0;
 }

@@ -23,7 +23,9 @@ add_executable(snake
     ${SRC_ROOT}/engine.cpp
     ${SRC_ROOT}/apple.cpp
     ${SRC_ROOT}/snake.cpp
-    ${SRC_ROOT}/empty.cpp)
+    ${SRC_ROOT}/empty.cpp
+    ${SRC_ROOT}/scoreboard.cpp
+    )
 
 target_link_libraries(snake ncurses)
 

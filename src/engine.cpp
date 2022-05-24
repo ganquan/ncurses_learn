@@ -7,12 +7,17 @@
 #include "board.cpp"
 #include "drawable.cpp"
 #include "empty.cpp"
+#include "scoreboard.cpp"
 #include "snake.cpp"
 
 class Engine {
  public:
     Engine() {
         board = Board();
+        scoreboard =
+            ScoreBoard(BOARD_COLS, 
+            board.getStartRow() + BOARD_ROWS,
+             board.getStartCol());
 
         pApple = nullptr;
 
@@ -26,6 +31,10 @@ class Engine {
 
     void initialize() {
         board.initialize();
+
+        score = 0;
+        scoreboard.initialize(score);
+
         game_over = false;
 
         srand(time(NULL));
@@ -60,17 +69,30 @@ class Engine {
         board.add(*pApple);
     }
 
-    void destoryApple() {
+    void eatApple() {
         delete pApple;
         pApple = nullptr;
+
+    }
+    
+    void increaseScore() {
+        score++;
+        scoreboard.updateScore(score);
+    }
+    
+    void speedup() {
+        auto speedup_step = 10;
+        auto timeout = std::max(default_timeout - score * speedup_step, minimum_timeout);
+        board.setTimeout(timeout);
     }
 
     void handleNextPiece(SnakePiece next) {
-        
         if (pApple != nullptr) {
             switch (board.getCharAt(next.getY(), next.getX())) {
                 case DEFAULT_APPLE:
-                    destoryApple();
+                    eatApple();
+                    increaseScore();
+                    speedup();
                     break;
 
                 case DEFAULT_EMPTY: {
@@ -128,20 +150,27 @@ class Engine {
     }
 
     void updateState() {
-        
         SnakePiece next = snake.nextHead();
         handleNextPiece(next);
-        
+
         if (pApple == nullptr) {
             createApple();
         }
     }
 
-    void redraw() { board.refresh(); }
+    void redraw() {
+        board.refresh();
+        scoreboard.refresh();
+    }
 
     bool isOver() { return game_over; }
 
+    int getScore() { return score; }
+
  private:
+    ScoreBoard scoreboard;
+    int score;
+
     Board board;
     Apple *pApple;
     bool game_over;
